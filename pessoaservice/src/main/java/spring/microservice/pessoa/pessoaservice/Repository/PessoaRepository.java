@@ -26,7 +26,9 @@ public class PessoaRepository {
 		pessoa.setEndereco("Rua a, numero 1");
 		pessoa.setNome("Andre");
 		calendar.set(2019, 01, 11);
-		AddDivida(pessoa, new Divida(new BigDecimal(100.87), "Banco Z", calendar.getTime()));
+		ArrayList<Divida> dividas = pessoa.getDividas();
+		dividas.add(new Divida(new BigDecimal(100.87), "Banco Z", calendar.getTime()));
+		pessoa.setDividas(dividas);
 		
 		this.Add(pessoa);
 	
@@ -38,8 +40,9 @@ public class PessoaRepository {
 		pessoa2.setEndereco("Rua a, numero 1");
 		pessoa2.setNome("Bianca");
 		calendar.set(2016, 10, 30);
-		AddDivida(pessoa2, new Divida(new BigDecimal(2000.87), "Banco A", calendar.getTime()));
-		
+		ArrayList<Divida> dividas2 = pessoa.getDividas();
+		dividas2.add( new Divida(new BigDecimal(2000.87), "Banco A", calendar.getTime()));
+		pessoa.setDividas(dividas2);
 		this.Add(pessoa2);
 		
 	}
@@ -77,15 +80,6 @@ public class PessoaRepository {
 		
 	}
 
-	private int getNextIdDivida(Pessoa pessoa) {
-		int maior = 0;
-		for (Divida d : pessoa.getDividas()) {
-			if (d.getId() > maior) {
-				maior = d.getId();
-			}
-		}
-		return ++maior;
-	}
 
 	public void Remove(int i) throws Exception {
 		if ((i >= 0) && (i < listaPessoas.size())) {
@@ -102,28 +96,6 @@ public class PessoaRepository {
 			 return i;
 		}
 		return -1;
-	}
-	public Pessoa FindPessoaByCpf(String cpf) {
-
-		for (int i = 0; i < this.listaPessoas.size(); i++) {
-			if (listaPessoas.get(i).getCpf().equals(cpf))
-			return listaPessoas.get(i);
-		}
-		return null;
-	}
-
-	public void AddDivida(Pessoa pessoa, Divida divida) {
-		ArrayList<Divida> dividas = pessoa.getDividas();
-		
-		if (divida.getId() == 0) {
-			divida.setId(getNextIdDivida(pessoa));
-			dividas.add(divida);
-		}
-		else {
-			dividas.set(divida.getId(), divida);
-		}
-		pessoa.setDividas(dividas);
-
 	}
 
 }

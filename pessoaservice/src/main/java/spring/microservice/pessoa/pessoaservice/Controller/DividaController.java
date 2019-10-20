@@ -26,13 +26,12 @@ public class DividaController {
 	@Autowired
 	DividaController(PessoaRepository pessoaRepositorio,
 			PessoaService pessoaServico) {
-		this.repositorioPessoas = pessoaRepositorio;
 		this.pessoaService = pessoaServico;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST) 
 	public DividaDetail create(@RequestBody DividaDetail detail) {
-		Pessoa pessoa = repositorioPessoas.FindPessoaByCpf(detail.getCpf());
+		Pessoa pessoa = pessoaService.FindPessoaByCpf(detail.getCpf());
 	    
 		if (pessoa == null) {
 			PessoaDetail pessoaDetail = new PessoaDetail(
@@ -50,7 +49,7 @@ public class DividaController {
 	    		detail.getInstituicao(), 
 	    		detail.getUtimoPagamento());
 	    
-	    repositorioPessoas.AddDivida(pessoa, divida);
+	    pessoaService.AddDivida(pessoa, divida);
 	    
 	    return detail;		
 	}
