@@ -8,7 +8,7 @@ Apresentação (ppt): https://1drv.ms/p/s!Ah1MCgg4OMSUgpN63MeMf4izJ__zew?e=m8Xi4
 
 
 ## Tecnologias utilizadas
-Cloud AWS, Docker, Jenkins, PostgreSQL/Oracle, ElasticSearch, Redis
+Cloud AWS, Docker, Jenkins, PostgreSQL/Oracle, MongoDB, ElasticSearch, Redis
 
 ## Contato
 E-mail: alexandrefelixsouza@gmail.com
